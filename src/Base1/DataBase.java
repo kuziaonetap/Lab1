@@ -1,3 +1,5 @@
+package Base1;
+
 import java.util.Scanner;
 
 class Person{
@@ -34,7 +36,6 @@ public class DataBase {
         System.out.println("\nDatabase of people:\nLast name\tName\tGender\tHeight");
         for (Person p: person) {
             System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
-
         }
     }
 }
