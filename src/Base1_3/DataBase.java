@@ -55,6 +55,32 @@ public class DataBase {
         }
         aveMan/=countMan;
         aveWoman/=countWoman;
-        System.out.println("Average height of women and men:");
+        System.out.println("\nAverage height of women is "+aveWoman+"\nAverage height of men is "+aveMan);
+
+        //Sort the list by height
+        Person tempPerson;
+        for(int i=0; i<person.length-1; i++) {
+            if(person[i].height>person[i+1].height){
+                tempPerson=person[i+1];
+                person[i+1]=person[i];
+                person[i]=tempPerson;
+                i=0;
+            }
+        }
+        // Display information about sorted persons
+        System.out.println("\nSorted database of people:\nLast name\tName\tGender\tHeight");
+        for (Person p: person) {
+            System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
+        }
+
+        //Determine the tallest man
+        for(int i= person.length-1;i>0;i--){
+            if(person[i].gender.equals("man")){
+                System.out.println("\nThe tallest man is: ");
+                System.out.print(person[i].lastName+ "\t"+person[i].name + "\t"+person[i].gender + "\t" +person[i].height + "\n");
+                break;
+            }
+        }
+
     }
 }
