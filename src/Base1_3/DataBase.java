@@ -74,7 +74,7 @@ public class DataBase {
         }
 
         //Determine the tallest man
-        for(int i= person.length-1;i>0;i--){
+        for(int i=person.length-1; i>0; i--){
             if(person[i].gender.equals("man")){
                 System.out.println("\nThe tallest man is: ");
                 System.out.print(person[i].lastName+ "\t"+person[i].name + "\t"+person[i].gender + "\t" +person[i].height + "\n");
@@ -82,5 +82,15 @@ public class DataBase {
             }
         }
 
+        //Search by last name, correction of one of the fields
+        System.out.println("\nEnter the last name of the person you are looking for =>");
+        String lastNameToSearch =sc.nextLine();
+        sc.nextLine();
+        for(Person p: person){
+            if(p.lastName.equals(lastNameToSearch))
+            {
+                System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
+            }
+        }
     }
 }
