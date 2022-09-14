@@ -23,13 +23,13 @@ public class DataBase {
             person[i] = new Person(); //a reference to the i-th element is obtained
 
             //Assigning values to fields
-            System.out.print("Enter the last name of person "+(i+1)+ " => ");
+            System.out.print("Enter Last name of person "+(i+1)+ " => ");
             person[i].lastName = sc.nextLine();
-            System.out.print("Enter name => ");
+            System.out.print("Enter Name => ");
             person[i].name=sc.nextLine();
-            System.out.print("Enter gender => ");
+            System.out.print("Enter Gender => ");
             person[i].gender=sc.nextLine();
-            System.out.print("Enter height => ");
+            System.out.print("Enter Height => ");
             person[i].height=sc.nextFloat();
             sc.nextLine();
         }
@@ -82,15 +82,47 @@ public class DataBase {
             }
         }
 
-        //Search by last name, correction of one of the fields
-        System.out.println("\nEnter the last name of the person you are looking for =>");
+        //Search by last name
+        System.out.print("\nEnter the last name of the person you are looking for => ");
         String lastNameToSearch =sc.nextLine();
-        sc.nextLine();
-        for(Person p: person){
-            if(p.lastName.equals(lastNameToSearch))
-            {
-                System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
+        boolean isEditing = true;
+        for (Person p : person) {
+            if (p.lastName.equalsIgnoreCase(lastNameToSearch)) {
+                System.out.println(p.lastName + "\t" + p.name + "\t" + p.gender + "\t" + p.height + "\n");
+                //Correction of one of the fields
+                do {
+                    System.out.println("Edit information about a person? \n0-No\n1-Yes");
+                    byte answerEdit = sc.nextByte();
+                    sc.nextLine();
+                    if (answerEdit == 1) {
+                        System.out.println("Choose a field to edit. \n0-Last Name\n1-Name\n2-Gender\n3-Height");
+                        byte answerField = sc.nextByte();
+                        sc.nextLine();
+                        switch (answerField) {
+                            case 0 -> {
+                                System.out.print("Enter Last name of person => ");
+                                p.lastName = sc.nextLine();
+                            }
+                            case 1 -> {
+                                System.out.print("Enter Name => ");
+                                p.name = sc.nextLine();
+                            }
+                            case 2 -> {
+                                System.out.print("Enter Gender => ");
+                                p.gender = sc.nextLine();
+                            }
+                            case 3 -> {
+                                System.out.print("Enter Height => ");
+                                p.height = sc.nextFloat();
+                            }
+                            default -> System.out.print("Wrong answer");
+                        }
+                    } else if (answerEdit == 0) isEditing = false;
+                } while (isEditing);
+                System.out.println("Edited person");
+                System.out.print(p.lastName + "\t" + p.name + "\t" + p.gender + "\t" + p.height + "\n");
             }
+            else System.out.println("This person does not exist");
         }
     }
 }
