@@ -1,4 +1,4 @@
-package Base1_3;//Варіант 7
+package Base1_4;//Варіант 7
 
 import java.util.Scanner;
 
@@ -8,15 +8,40 @@ class Person{
 }
 
 public class DataBase {
+
     public static void main(String[] args) {
 
         // Entering information about a person
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter the number of people => ");
         int num =sc.nextInt();
-        sc.nextLine(); //clearing the buffer after entering a number
+        sc.nextLine();
+        Person[] person=SetPersonArr(num);
 
-        Person[]person=new Person[num];//received a reference to the person array
+        // Display information about persons
+        System.out.println("\nDatabase of people:\nLast name\tName\tGender\tHeight");
+        ShowArray(person);
+
+        //Average height of women and men
+        AverageHeight(person);
+
+        //Sort the list by height
+        SortHeight(person);
+
+        // Display information about sorted persons
+        System.out.println("\nSorted database of people:\nLast name\tName\tGender\tHeight");
+        ShowArray(person);
+
+        //Determine the tallest man
+        TallestMan(person);
+
+        //Search by last name, correction of one of the fields
+        SearchByLastName(person);
+    }
+    public static Person [] SetPersonArr (int k)
+    {
+        Scanner sc=new Scanner(System.in);
+        Person[]person=new Person[k];//received a reference to the person array
 
         System.out.println("Enter information about each person:");
         for (int i = 0; i < person.length; i++){
@@ -33,14 +58,16 @@ public class DataBase {
             person[i].height=sc.nextFloat();
             sc.nextLine();
         }
+        return person;
+    }
 
-        // Display information about persons
-        System.out.println("\nDatabase of people:\nLast name\tName\tGender\tHeight");
+    public static void ShowArray(Person[] person){
         for (Person p: person) {
             System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
         }
+    }
 
-        //Average height of women and men
+    public static void AverageHeight(Person[] person){
         int countMan=0, countWoman=0;
         float aveMan=0, aveWoman=0;
         for(Person p: person) {
@@ -56,8 +83,9 @@ public class DataBase {
         aveMan/=countMan;
         aveWoman/=countWoman;
         System.out.println("\nAverage height of women is "+aveWoman+"\nAverage height of men is "+aveMan);
+    }
 
-        //Sort the list by height
+    public static void SortHeight(Person[] person){
         Person tempPerson;
         for(int i=0; i<person.length-1; i++) {
             if(person[i].height>person[i+1].height){
@@ -67,13 +95,9 @@ public class DataBase {
                 i=0;
             }
         }
-        // Display information about sorted persons
-        System.out.println("\nSorted database of people:\nLast name\tName\tGender\tHeight");
-        for (Person p: person) {
-            System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
-        }
+    }
 
-        //Determine the tallest man
+    public static void TallestMan(Person[] person){
         for(int i=person.length-1; i>0; i--){
             if(person[i].gender.equals("man")){
                 System.out.println("\nThe tallest man is: ");
@@ -81,8 +105,10 @@ public class DataBase {
                 break;
             }
         }
+    }
 
-        //Search by last name
+    public static void SearchByLastName(Person[] person){
+        Scanner sc=new Scanner(System.in);
         System.out.print("\nEnter the last name of the person you are looking for => ");
         String lastNameToSearch =sc.nextLine();
         boolean isEditing = true;
