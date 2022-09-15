@@ -3,6 +3,7 @@ package Base1_4;//Варіант 7
 import java.util.Scanner;
 
 class Person{
+
     String lastName, name, gender;
     float height;
 }
@@ -38,6 +39,8 @@ public class DataBase {
         //Search by last name, correction of one of the fields
         SearchByLastName(person);
     }
+
+    // Entering information about a person
     public static Person [] SetPersonArr (int k)
     {
         Scanner sc=new Scanner(System.in);
@@ -61,12 +64,18 @@ public class DataBase {
         return person;
     }
 
+    // Display information about persons
     public static void ShowArray(Person[] person){
         for (Person p: person) {
-            System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
+            ShowPerson(p);
         }
     }
 
+    public static void ShowPerson(Person p){
+        System.out.print(p.lastName+ "\t"+p.name + "\t"+p.gender + "\t" +p.height + "\n");
+    }
+
+    //Average height of women and men
     public static void AverageHeight(Person[] person){
         int countMan=0, countWoman=0;
         float aveMan=0, aveWoman=0;
@@ -85,6 +94,7 @@ public class DataBase {
         System.out.println("\nAverage height of women is "+aveWoman+"\nAverage height of men is "+aveMan);
     }
 
+    //Sort the list by height
     public static void SortHeight(Person[] person){
         Person tempPerson;
         for(int i=0; i<person.length-1; i++) {
@@ -97,16 +107,18 @@ public class DataBase {
         }
     }
 
+    //Determine the tallest man
     public static void TallestMan(Person[] person){
         for(int i=person.length-1; i>0; i--){
             if(person[i].gender.equals("man")){
                 System.out.println("\nThe tallest man is: ");
-                System.out.print(person[i].lastName+ "\t"+person[i].name + "\t"+person[i].gender + "\t" +person[i].height + "\n");
+                ShowPerson(person[i]);
                 break;
             }
         }
     }
 
+    //Search by last name
     public static void SearchByLastName(Person[] person){
         Scanner sc=new Scanner(System.in);
         System.out.print("\nEnter the last name of the person you are looking for => ");
@@ -146,7 +158,7 @@ public class DataBase {
                     } else if (answerEdit == 0) isEditing = false;
                 } while (isEditing);
                 System.out.println("Edited person");
-                System.out.print(p.lastName + "\t" + p.name + "\t" + p.gender + "\t" + p.height + "\n");
+                ShowPerson(p);
             }
             else System.out.println("This person does not exist");
         }
